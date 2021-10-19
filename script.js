@@ -1,10 +1,12 @@
 let clock = document.getElementById("clock");
+let _hours;
+let _timesOfDay;
 function LiveClock(){
     let time = new Date(); 
-    let hours = (time.getHours()%12).toString();
+    let hours = time.getHours().toString();
     let minute = time.getMinutes().toString() ;
     let second = time.getSeconds().toString();
-
+    _hours = hours;
     if (hours.length < 2) {
         hours = "0" + hours;
     }
@@ -18,58 +20,42 @@ function LiveClock(){
     clock.innerHTML = clockString ;
 }
 setInterval(LiveClock , 1000);
- /*
-let slideIndex = 1 ;
-showSlides(slideIndex);
+function TimeOfDayDefinitions(){
+    if(_hours < 6){
+        _timesOfDay = "night";
+    }else if( _hours < 18){
+        _timesOfDay = "morning";
+    }else if(_hours > 18){
+        _timesOfDay = "evening";
+    }
 
-function plusSlides(n){
-    showSlides(slideIndex += n);
 }
-function currentSlide(n){
-    showSlides(slideIndex = n);
-}
+setInterval(TimeOfDayDefinitions , 1000);
 
-function showSlides(n){
-    var i ;
-    var slides = document.getElementsByClassName("mySlides");
-    if (n >slides.length){
-        slideIndex = 1 
-    }
-    if( n < 1){
-        slideIndex = slides.length
-    }
-    for( i=0; i <slides.length; i++){
-        slides[i].style.display ="none"
-    }
-    slides[slideIndex-1].style.display = "block" ;
- }
-*/
-let _arrImgesUrls = ["image/depositphotos_5214674-stock-photo-tropical-sea-sunset.jpg ", "image/11219_original.jpg" ,"image/udarenie-v-slove-utra.jpg"]
-let _indexUrlsArray = 0 ;
+let _numberImage = 10 ;
+let _countImages = 20;
 let _body = document.querySelector("body");
-_body.style.backgroundImage = `url("${_arrImgesUrls[_indexUrlsArray]}")`;
+_body.style.backgroundImage = `url("https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${_timesOfDay}/${_numberImage}.jpg")`;
  
 function checkLengthIsMax(){
-     if (_indexUrlsArray == _arrImgesUrls.length){
-        _indexUrlsArray= 0;
+     if (_numberImage == _countImages){
+        _numberImage= 10;
      }
  }
 function checkLegthIsMin(){
-     if ( _indexUrlsArray < 0){
-        _indexUrlsArray = _arrImgesUrls.length - 1;
+     if ( _numberImage < 10){
+        _numberImage = _countImages;
      } 
 } 
 
 document.querySelector(".prev").onclick = function(){
     checkLegthIsMin();
-    _body.style.backgroundImage = `url("${_arrImgesUrls[_indexUrlsArray]}")` ;
-    _indexUrlsArray--;
-    plusSlides(-1)
+    _body.style.backgroundImage = `url("https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/evening/${_numberImage}.jpg")` ;
+    _numberImage--;
 }
 document.querySelector(".next").onclick = function(){
     checkLengthIsMax();
-    _body.style.backgroundImage = `url("${_arrImgesUrls[_indexUrlsArray]}")` ;
-    _indexUrlsArray++;
-    plusSlides(1)
+    _body.style.backgroundImage = `url("https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/evening/${_numberImage}.jpg")` ;
+    _numberImage++;
 }
 
