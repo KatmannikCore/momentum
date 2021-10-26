@@ -19,8 +19,7 @@ function LiveClock(){
     let clockString = hours + ":" + minute + ":" + second ;
     clock.innerHTML = clockString ;
     if(minute == 59 && second == 59 ){
-        GetTimesOfDay();
-        SetGreetings();
+        Temp();
     }
 }
 setInterval(LiveClock , 1000);
@@ -90,11 +89,30 @@ async function getWeather() {
     console.log(data);
     console.log( data.weather[0].description, data.main.temp);
     let weather = document.querySelector(".weather");
-    document.getElementById("weather-temperature").innerHTML = Math.round(data.main.temp) + " " + data.weather[0].description;
-    document.getElementById("humidity").innerHTML = data.main.humidity+"%";
-    document.getElementById("wind-speed").innerHTML = "Скорость вестра: " + Math.round(parseFloat(data.wind.speed) * 10) / 10 +" м/c";
-    document.getElementById("weather-sity").innerHTML = data.name; 
-    document.getElementById("weather-img").setAttribute("src",`http://openweathermap.org/img/wn/${data.weather[0].icon}.png`);
-    //http://openweathermap.org/img/wn/02d@2x.png       
+
+    //http://openweathermap.org/img/wn/02d@2x.png
   }
   getWeather()
+
+ /*async function getAudio() {  
+    const adio = 'audio.json';
+    const res = await fetch(adio);
+    const data = await res.json(); 
+    let audio = document.querySelector("audio");
+    audio.setAttribute("src", data[0].src);
+  }
+  */
+ let _play = document.querySelector(".play")
+ let _pause = document.querySelector(".pause") 
+ let _audio = document.querySelector("audio")
+_play.onclick=function(){
+    _audio.play();
+    _play.hidden = true ;
+    _pause.hidden = false ;
+}
+_pause.onclick=function(){
+    _audio.pause();
+    _play.hidden = false;
+    _pause.hidden = true ;
+   }
+_pause.hidden = true ;

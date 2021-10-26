@@ -50,19 +50,13 @@ body{
 h2{
     color: wheat;
 }
-input[type="text"] {
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 30px;
-    width: 220px;
-    margin-left: 20px;
-    color: white;
+.audio-prev ,.audio-next{
+ height: 55px;
 }
-input[type="text"]::-webkit-input-placeholder {
-    color: rgb(71, 70, 70);
+.songs img{
+    margin: 10px ;
+    height: 35px;
 }
-.date div{
-    display: flex;
-    justify-content: center;
+.songs img:first-child{
+    margin-top: 35px;
 }
