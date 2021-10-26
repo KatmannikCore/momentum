@@ -1,3 +1,6 @@
+let _numberImage = 10 ;
+let _countImages = 20;
+let _body = document.querySelector("body");
 function Temp (){
     let time = new Date(); 
     let hours = time.getHours().toString();
@@ -8,8 +11,30 @@ function Temp (){
     }else if(hours >= 18){
         _timesOfDay = "evening";
     }
-    checkLengthIsMax();
+    //checkLengthIsMax();
     document.body.style.backgroundImage = `url("https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${_timesOfDay}/${_numberImage}.jpg")`;
     _numberImage++;
 }
 Temp();
+
+function checkLengthIsMax(){
+    if (_numberImage > _countImages){
+       _numberImage= 10;
+    }
+}
+function checkLengthIsMin(){
+    if ( _numberImage < 10){
+       _numberImage = _countImages;
+    } 
+} 
+
+document.querySelector(".prev").onclick = function(){
+   checkLengthIsMin();
+   _body.style.backgroundImage = `url("https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${_timesOfDay}/${_numberImage}.jpg")` ;
+   _numberImage--;
+}
+document.querySelector(".next").onclick = function(){
+   checkLengthIsMax();
+   _body.style.backgroundImage = `url("https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${_timesOfDay}/${_numberImage}.jpg")` ;
+   _numberImage++;
+}

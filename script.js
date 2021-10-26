@@ -38,31 +38,9 @@ function LiveDate(){
     document.querySelector(".day").innerHTML = `${days[date.getDay()]}, ${monthNames[date.getMonth()]} ${date.getDate()}`;
 }
 LiveDate();
-let _numberImage = 10 ;
-let _countImages = 20;
-let _body = document.querySelector("body");
 
-function checkLengthIsMax(){
-     if (_numberImage > _countImages){
-        _numberImage= 10;
-     }
- }
-function checkLengthIsMin(){
-     if ( _numberImage < 10){
-        _numberImage = _countImages;
-     } 
-} 
 
-document.querySelector(".prev").onclick = function(){
-    checkLengthIsMin();
-    _body.style.backgroundImage = `url("https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${_timesOfDay}/${_numberImage}.jpg")` ;
-    _numberImage--;
-}
-document.querySelector(".next").onclick = function(){
-    checkLengthIsMax();
-    _body.style.backgroundImage = `url("https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${_timesOfDay}/${_numberImage}.jpg")` ;
-    _numberImage++;
-}
+
 
 async function getQuotes() {  
     const quotes = 'data.json';
@@ -105,6 +83,8 @@ async function getWeather() {
  let _play = document.querySelector(".play")
  let _pause = document.querySelector(".pause") 
  let _audio = document.querySelector("audio")
+ let _audioPrev = document.querySelector(".audio-prev") 
+ let _audioNext = document.querySelector(".audio-next")
 _play.onclick=function(){
     _audio.play();
     _play.hidden = true ;
@@ -116,3 +96,33 @@ _pause.onclick=function(){
     _pause.hidden = true ;
    }
 _pause.hidden = true ;
+_audioPrev.onclick = function(){
+    if (_index >= 0 ){
+        GetMusic(_index);
+        _index--
+    }else{
+        _index = 3
+        GetMusic(_index);
+    }
+}
+_audioNext.onclick = function(){
+    if (_index !=3 ){
+        GetMusic(_index);
+        _index++
+    }else{
+        _index = 0;
+        GetMusic(_index);
+    }
+}
+
+async function GetMusic(index){ 
+    const quotes =  'audio.json';
+    const res = await fetch(quotes);
+    const audio = await res.json();
+    _audio.setAttribute("src",audio[index].src);
+    _audio.play();
+    alert(_index);
+}
+let _index = 1 ;
+
+

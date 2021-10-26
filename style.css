@@ -60,3 +60,19 @@ h2{
 .songs img:first-child{
     margin-top: 35px;
 }
+.play-item::before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-weight: 900;
+}
+.play-item {
+    position: relative;
+    padding: 5px;
+    padding-left: 20px;
+    list-style: none;
+    opacity: .8;
+    cursor: pointer;
+    transition: .3s;
+}
