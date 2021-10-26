@@ -18,44 +18,83 @@ function LiveClock(){
     }
     let clockString = hours + ":" + minute + ":" + second ;
     clock.innerHTML = clockString ;
+    if(minute == 59 && second == 59 ){
+        GetTimesOfDay();
+        SetGreetings();
+    }
 }
 setInterval(LiveClock , 1000);
-function TimeOfDayDefinitions(){
-    if(_hours < 6){
-        _timesOfDay = "night";
-    }else if( _hours < 18){
-        _timesOfDay = "morning";
-    }else if(_hours > 18){
-        _timesOfDay = "evening";
-    }
-
+function LiveDate(){
+    var days = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday'
+      ];
+    const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
+    let date = new Date(); 
+    document.querySelector(".day").innerHTML = `${days[date.getDay()]}, ${monthNames[date.getMonth()]} ${date.getDate()}`;
 }
-setInterval(TimeOfDayDefinitions , 1000);
-
+LiveDate();
 let _numberImage = 10 ;
 let _countImages = 20;
 let _body = document.querySelector("body");
-_body.style.backgroundImage = `url("https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${_timesOfDay}/${_numberImage}.jpg")`;
- 
+
 function checkLengthIsMax(){
-     if (_numberImage == _countImages){
+     if (_numberImage > _countImages){
         _numberImage= 10;
      }
  }
-function checkLegthIsMin(){
+function checkLengthIsMin(){
      if ( _numberImage < 10){
         _numberImage = _countImages;
      } 
 } 
 
 document.querySelector(".prev").onclick = function(){
-    checkLegthIsMin();
-    _body.style.backgroundImage = `url("https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/evening/${_numberImage}.jpg")` ;
+    checkLengthIsMin();
+    _body.style.backgroundImage = `url("https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${_timesOfDay}/${_numberImage}.jpg")` ;
     _numberImage--;
 }
 document.querySelector(".next").onclick = function(){
     checkLengthIsMax();
-    _body.style.backgroundImage = `url("https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/evening/${_numberImage}.jpg")` ;
+    _body.style.backgroundImage = `url("https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${_timesOfDay}/${_numberImage}.jpg")` ;
     _numberImage++;
 }
 
+async function getQuotes() {  
+    const quotes = 'data.json';
+    const res = await fetch(quotes);
+    const data = await res.json(); 
+    let text = document.querySelector(".text");
+    let author = document.querySelector(".author");
+    let index = getRandomInt(3);
+    text.innerHTML = data[index].text;
+    author.innerHTML = data[index].author
+  }
+function getRandomInt(max) {
+   return Math.floor(Math.random() * max);
+}
+getQuotes()
+
+document.querySelector(".change-quote").onclick = function() {
+    getQuotes();
+}
+async function getWeather() {  
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=Москва&lang=ru&appid=08f2a575dda978b9c539199e54df03b0&units=metric`;
+    const res = await fetch(url);
+    const data = await res.json(); 
+    console.log(data);
+    console.log( data.weather[0].description, data.main.temp);
+    let weather = document.querySelector(".weather");
+    document.getElementById("weather-temperature").innerHTML = Math.round(data.main.temp) + " " + data.weather[0].description;
+    document.getElementById("humidity").innerHTML = data.main.humidity+"%";
+    document.getElementById("wind-speed").innerHTML = "Скорость вестра: " + Math.round(parseFloat(data.wind.speed) * 10) / 10 +" м/c";
+    document.getElementById("weather-sity").innerHTML = data.name; 
+    document.getElementById("weather-img").setAttribute("src",`http://openweathermap.org/img/wn/${data.weather[0].icon}.png`);
+    //http://openweathermap.org/img/wn/02d@2x.png       
+  }
+  getWeather()

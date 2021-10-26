@@ -1,4 +1,4 @@
-#clock {
+.date {
     text-align: center;
     font-size: 45px;
     color:aqua; 
@@ -41,4 +41,28 @@ body{
 body{
     background-repeat: no-repeat;
     background-size: cover;
+}
+.quote{
+    color: white;
+    font-size: 30px;
+    text-align: center;
+}
+h2{
+    color: wheat;
+}
+input[type="text"] {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 30px;
+    width: 220px;
+    margin-left: 20px;
+    color: white;
+}
+input[type="text"]::-webkit-input-placeholder {
+    color: rgb(71, 70, 70);
+}
+.date div{
+    display: flex;
+    justify-content: center;
 }
