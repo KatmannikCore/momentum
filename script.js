@@ -42,7 +42,6 @@ LiveDate();
 let _numberImage = 10 ;
 let _countImages = 20;
 let _body = document.querySelector("body");
-
 function checkLengthIsMax(){
      if (_numberImage > _countImages){
         _numberImage= 10;
@@ -83,18 +82,53 @@ getQuotes()
 document.querySelector(".change-quote").onclick = function() {
     getQuotes();
 }
-async function getWeather() {  
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=Москва&lang=ru&appid=08f2a575dda978b9c539199e54df03b0&units=metric`;
-    const res = await fetch(url);
-    const data = await res.json(); 
-    console.log(data);
-    console.log( data.weather[0].description, data.main.temp);
-    let weather = document.querySelector(".weather");
-    document.getElementById("weather-temperature").innerHTML = Math.round(data.main.temp) + " " + data.weather[0].description;
-    document.getElementById("humidity").innerHTML = data.main.humidity+"%";
-    document.getElementById("wind-speed").innerHTML = "Скорость вестра: " + Math.round(parseFloat(data.wind.speed) * 10) / 10 +" м/c";
-    document.getElementById("weather-sity").innerHTML = data.name; 
-    document.getElementById("weather-img").setAttribute("src",`http://openweathermap.org/img/wn/${data.weather[0].icon}.png`);
-    //http://openweathermap.org/img/wn/02d@2x.png       
-  }
-  getWeather()
+
+
+
+ function getWeather(url) {  
+    let data ;
+    const res =  fetch(url).then(function (response) {
+        response.json().then(function (Data) {
+          data = Data;
+        }).then(
+            function(){
+              let weather = document.querySelector(".weather");
+              document.getElementById("weather-temperature").innerHTML = Math.round(data.main.temp) + " " + data.weather[0].description;
+              document.getElementById("humidity").innerHTML = data.main.humidity+"%";
+              document.getElementById("wind-speed").innerHTML = "Скорость вестра: " + Math.round(parseFloat(data.wind.speed) * 10) / 10 +" м/c";
+              document.getElementById("weather-sity").innerHTML = data.name; 
+              document.getElementById("weather-img").setAttribute("src",`http://openweathermap.org/img/wn/${data.weather[0].icon}.png`); 
+            }
+        )
+      })   
+}
+window.onload= function(){
+    let sity = document.getElementById("weather-sity").value;
+    getWeather(`https://api.openweathermap.org/data/2.5/weather?q=${sity}&lang=ru&appid=08f2a575dda978b9c539199e54df03b0&units=metric`    )
+}
+
+//onblur 
+document.getElementById("weather-sity").onblur = function() {
+    let sity = document.getElementById("weather-sity").value;
+    getWeather(`https://api.openweathermap.org/data/2.5/weather?q=${sity}&lang=ru&appid=08f2a575dda978b9c539199e54df03b0&units=metric`)
+}
+
+function SetNameForGreetings(){
+    let name = document.getElementById("name");
+    name.value = localStorage.getItem('name');
+    name.oninput = () => {
+      localStorage.setItem('name', name.value)
+    };
+}
+function SetSityForGreetings(){
+    let sity = document.getElementById("weather-sity");
+    sity.value = localStorage.getItem('sity');
+    sity.oninput = () => {
+      localStorage.setItem('sity', sity.value)
+    };
+    if(sity.value == ""){
+        sity.value = "Минск" 
+    }
+}
+SetNameForGreetings();
+SetSityForGreetings()

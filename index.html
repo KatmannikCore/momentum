@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
-<body>
+<body >
     <div class="widgets">
         <div class="player"></div>
         <div class="weather">
-            <p id="weather-sity"></p>
+            <input type="text" id="weather-sity">
             <img id="weather-img">
             <p id="weather-temperature"></p>
             <p id="wind-speed"></p>
@@ -23,7 +23,7 @@
     <h2 class="day">iui</h2>
     <div>
         <p class="greetings"></p>
-        <input type="text" name="fname" autofocus placeholder="[ENTER NAME]" />
+        <input id="name" onclick="localStorage.removeItem('name');name.value=''" type="text" name="fname" autofocus placeholder="[ENTER NAME]" />
     </div>
     
 </div>

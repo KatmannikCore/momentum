@@ -4,7 +4,7 @@
     color:aqua; 
 }
 body{
-    background: black;
+    transition: background .65s ease-in-out;
 }
 
 
@@ -19,8 +19,8 @@ body{
     left: 98%;
     border-radius: 3px 0 0 3px;
 }
-.prev:hover , next:hover {
-    background-color: rgba(0,0,0,0.8);
+.prev:hover , .next:hover {
+    color: rgba(0,0,0,0.8);
 }
 
 .fade{
@@ -50,7 +50,7 @@ body{
 h2{
     color: wheat;
 }
-input[type="text"] {
+.date input[type="text"] {
     background: transparent;
     border: none;
     outline: none;
@@ -59,10 +59,21 @@ input[type="text"] {
     margin-left: 20px;
     color: white;
 }
-input[type="text"]::-webkit-input-placeholder {
+.date input[type="text"]::-webkit-input-placeholder {
     color: rgb(71, 70, 70);
 }
 .date div{
     display: flex;
     justify-content: center;
+}
+.animation-background{
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+}
+.widgets input{
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 30px;
+    width: 220px;
 }
