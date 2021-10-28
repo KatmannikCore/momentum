@@ -1,17 +1,17 @@
 [
     {      
-      "title": "In da club",
-      "src": "music/01 In Da Club.mp3",
+      "title": "Cinema",
+      "src": "music/cinema.mp3",
       "duration": "3.0"
     },  
     {      
-      "title": "Появись",
-      "src": "music/06 Появись.mp3" ,
+      "title": "Piano moment",
+      "src": "music/piano moment.mp3" ,
       "duration": "2.57"
     },
     {      
-        "title": "Некрещеная луна",
-        "src": "music/1-04 Некрещеная луна.mp3",
+        "title": "The way home",
+        "src": "music/the way home.mp3",
         "duration": "2.0"
     }
   ]

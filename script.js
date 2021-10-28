@@ -39,9 +39,6 @@ function LiveDate(){
 }
 LiveDate();
 
-
-
-
 async function getQuotes() {  
     const quotes = 'data.json';
     const res = await fetch(quotes);
@@ -67,28 +64,22 @@ async function getWeather() {
     console.log(data);
     console.log( data.weather[0].description, data.main.temp);
     let weather = document.querySelector(".weather");
-
-    //http://openweathermap.org/img/wn/02d@2x.png
   }
   getWeather()
 
- /*async function getAudio() {  
-    const adio = 'audio.json';
-    const res = await fetch(adio);
-    const data = await res.json(); 
-    let audio = document.querySelector("audio");
-    audio.setAttribute("src", data[0].src);
-  }
-  */
- let _play = document.querySelector(".play")
- let _pause = document.querySelector(".pause") 
- let _audio = document.querySelector("audio")
- let _audioPrev = document.querySelector(".audio-prev") 
- let _audioNext = document.querySelector(".audio-next")
+ let _play = document.querySelector(".play");
+ let _pause = document.querySelector(".pause") ;
+ let _audio = document.querySelector("audio");
+ let _audioPrev = document.querySelector(".audio-prev") ;
+ let _audioNext = document.querySelector(".audio-next");
+ let _activeItems = document.querySelectorAll(".play-item");
+ let _activeIndex = 0;
+ 
 _play.onclick=function(){
     _audio.play();
     _play.hidden = true ;
     _pause.hidden = false ;
+    _activeItems[_activeIndex].classList.add("item-active")
 }
 _pause.onclick=function(){
     _audio.pause();
@@ -104,6 +95,10 @@ _audioPrev.onclick = function(){
         _index = 3
         GetMusic(_index);
     }
+    RemoveActiveClass()
+    _activeIndex--
+    IndexIsMin() 
+    _activeItems[_activeIndex].classList.add("item-active")
 }
 _audioNext.onclick = function(){
     if (_index !=3 ){
@@ -113,6 +108,11 @@ _audioNext.onclick = function(){
         _index = 0;
         GetMusic(_index);
     }
+    RemoveActiveClass()
+    _activeIndex++ 
+    IndexIsMax()
+    _activeItems[_activeIndex].classList.add("item-active")
+  
 }
 
 async function GetMusic(index){ 
@@ -121,8 +121,20 @@ async function GetMusic(index){
     const audio = await res.json();
     _audio.setAttribute("src",audio[index].src);
     _audio.play();
-    alert(_index);
 }
 let _index = 1 ;
-
-
+ 
+function RemoveActiveClass(){
+    for(let i = 0;i < _activeItems.length; i++)
+        _activeItems[i].classList.remove("item-active");
+}
+ function IndexIsMax() {
+   if (_activeIndex == _activeItems.length){
+      _activeIndex = 0 ;
+   }
+ }
+ function IndexIsMin() {
+    if (_activeIndex <  0){
+       _activeIndex = _activeItems.length -1;
+    }
+  }
