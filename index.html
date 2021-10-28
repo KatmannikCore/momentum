@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
-<body>
+<body >
     <div class="widgets">
         <div class="player">
             <img class="audio-prev" src="img.momentum/play-prev.svg" alt="">
@@ -15,34 +15,42 @@
             <img class="play"  src="img.momentum/play.svg" alt="">
             <img class="audio-next" src="img.momentum/play-next.svg" alt="">
             <audio src="music/the way home.mp3"></audio>
+            <div class="songs">
+                <ul class="play-list">
+                    <li class="play-item">Cinema</li>
+                    <li class="play-item">Piano moment</li>
+                    <li class="play-item">The way home</li>
+                </ul>
+              </div>
         </div>
-        <div class="songs">
-          <ul class="play-list">
-              <li class="play-item">Cinema</li>
-              <li class="play-item">Piano moment</li>
-              <li class="play-item">The way home</li>
-          </ul>
-        </div>
+        
         <div class="weather">
-            <p class="weather-sity"></p>
-            <img class="weather-img">
-            <p class="weather-temperature"></p>
-            <p class="wind speed"></p>
-            <p class="humidity"></p>
+            <input type="text" id="weather-sity">
+            <div class="line"></div>
+            <div class="info">
+                <img id="weather-img">
+                <p id="weather-temperature"></p>
+                <p id="wind-speed"></p>
+                <p id="humidity"></p>
+            </div>
+     
         </div>
     </div>
-<div class="date">
-    <h1 id="clock"> 00:00:00 </h1>
-    <h2 class="day">iui</h2>
-</div>
-
-<div class="arrows">
-   <a class="prev" >&#10094</a>
-   <a class="next" >&#10095</a>
-</div>
-<br>
+    <div class="date">
+        <h1 id="clock"> 00:00:00 </h1>
+        <p class="day">iui</p>
+        <div >
+            <p class="greetings"></p>
+            <input id="name" onclick="localStorage.removeItem('name');name.value=''" type="text" name="fname" autofocus placeholder="[Введите имя]" />
+        </div>
+        
+    </div>
+    <div class="arrows">
+    <a class="prev" >&#10094</a>
+    <a class="next" >&#10095</a>
+    </div>
     <div class="quote">
-        <button class="change-quote">X</button>
+        <img class="change-quote" src="img.momentum/reload.svg" alt="">
         <p class="text"></p>
         <p class="author"></p>
     </div>

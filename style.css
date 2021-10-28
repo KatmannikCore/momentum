@@ -1,10 +1,88 @@
+
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 .date {
     text-align: center;
     font-size: 45px;
-    color:aqua; 
+    color:white; 
 }
 body{
-    background: black;
+    transition: background .65s ease-in-out;
 }
 
 
@@ -19,8 +97,8 @@ body{
     left: 98%;
     border-radius: 3px 0 0 3px;
 }
-.prev:hover , next:hover {
-    background-color: rgba(0,0,0,0.8);
+.prev:hover , .next:hover {
+    color: white;
 }
 
 .fade{
@@ -46,9 +124,10 @@ body{
     color: white;
     font-size: 30px;
     text-align: center;
+    margin-bottom: 130px;
 }
 h2{
-    color: wheat;
+    color: white;
 }
 .audio-prev ,.audio-next{
  height: 55px;
@@ -62,11 +141,24 @@ h2{
 }
 .play-item::before {
     content: "\2713";
-    position: absolute;
-    left: 0;
+    left: 0px;
     top: 2px;
     font-weight: 900;
+    color: white;
 }
+.date input[type="text"] {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 30px;
+    width: 220px;
+    margin-left: 20px;
+    color: white;
+}
+.date input[type="text"]::-webkit-input-placeholder {
+    color:white;
+}
+
 .play-item {
     position: relative;
     padding: 5px;
@@ -76,6 +168,51 @@ h2{
     cursor: pointer;
     transition: .3s;
 }
+.animation-background{
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+}
+.widgets input{
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 30px;
+    width: 220px;
+    color: white;
+}
 .item-active::before {
-    color: #C5B358;
+    color: black;
+}
+.date div {
+    display: flex;
+    justify-content: center;
+}
+.widgets{
+    display: flex;
+    justify-content: space-between;
+}
+.day{
+    color:white;
+    font-size: 60px;
+}
+.play-list{
+    color:white;
+    font-size : 25px;
+}
+.weather{
+    color: white;
+}
+.line{
+    background: white;
+    height: 2px;;
+}
+.change-quote{
+    height: 30px;
+}
+body{
+    display:flex;
+    flex-direction:column;
+}
+.date{
+    flex: 1 1 auto;
 }
