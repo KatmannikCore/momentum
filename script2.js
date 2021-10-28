@@ -1,21 +1,40 @@
-let time = new Date(); 
-let hours = time.getHours().toString();
-function GetTimesOfDay (){    
-    if(hours < 6){_timesOfDay = "night";}
-    else if( hours < 12 ) {_timesOfDay = "morning"; }
-    else if( hours < 18 ) {_timesOfDay = "afternoon";}
-    else if( hours >= 18) {_timesOfDay = "evening"; }
-    checkLengthIsMax();
+let _numberImage = 10 ;
+let _countImages = 20;
+let _body = document.querySelector("body");
+function Temp (){
+    let time = new Date(); 
+    let hours = time.getHours().toString();
+    if(hours < 6){
+        _timesOfDay = "night";
+    }else if( hours < 18){
+        _timesOfDay = "morning";
+    }else if(hours >= 18){
+        _timesOfDay = "evening";
+    }
+    //checkLengthIsMax();
     document.body.style.backgroundImage = `url("https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${_timesOfDay}/${_numberImage}.jpg")`;
     _numberImage++;
 }
-function SetGreetings(){
-    let greetings;
-    if(hours < 6){greetings = "Good night";}
-    else if( hours < 12 ) {greetings = "Good morning"; }
-    else if( hours < 18 ) {greetings = "Good afternoon";}
-    else if( hours >= 18) {greetings = "Good evening"; }
-    document.querySelector(".greetings").innerHTML = greetings + ",";
+Temp();
+
+function checkLengthIsMax(){
+    if (_numberImage > _countImages){
+       _numberImage= 10;
+    }
+}
+function checkLengthIsMin(){
+    if ( _numberImage < 10){
+       _numberImage = _countImages;
+    } 
 } 
-GetTimesOfDay();
-SetGreetings();
+
+document.querySelector(".prev").onclick = function(){
+   checkLengthIsMin();
+   _body.style.backgroundImage = `url("https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${_timesOfDay}/${_numberImage}.jpg")` ;
+   _numberImage--;
+}
+document.querySelector(".next").onclick = function(){
+   checkLengthIsMax();
+   _body.style.backgroundImage = `url("https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${_timesOfDay}/${_numberImage}.jpg")` ;
+   _numberImage++;
+}

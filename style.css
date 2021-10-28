@@ -50,6 +50,23 @@ body{
 h2{
     color: wheat;
 }
+.audio-prev ,.audio-next{
+ height: 55px;
+}
+.songs img{
+    margin: 10px ;
+    height: 35px;
+}
+.songs img:first-child{
+    margin-top: 35px;
+}
+.play-item::before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-weight: 900;
+}
 .date input[type="text"] {
     background: transparent;
     border: none;
@@ -62,9 +79,15 @@ h2{
 .date input[type="text"]::-webkit-input-placeholder {
     color: rgb(71, 70, 70);
 }
-.date div{
-    display: flex;
-    justify-content: center;
+
+.play-item {
+    position: relative;
+    padding: 5px;
+    padding-left: 20px;
+    list-style: none;
+    opacity: .8;
+    cursor: pointer;
+    transition: .3s;
 }
 .animation-background{
     transition-duration: 200ms;
@@ -76,4 +99,7 @@ h2{
     outline: none;
     font-size: 30px;
     width: 220px;
+}
+.item-active::before {
+    color: #C5B358;
 }
