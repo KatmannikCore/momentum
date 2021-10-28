@@ -1,0 +1,17 @@
+[
+    {      
+      "title": "Cinema",
+      "src": "music/cinema.mp3",
+      "duration": "3.0"
+    },  
+    {      
+      "title": "Piano moment",
+      "src": "music/piano moment.mp3" ,
+      "duration": "2.57"
+    },
+    {      
+        "title": "The way home",
+        "src": "music/the way home.mp3",
+        "duration": "2.0"
+    }
+  ]
